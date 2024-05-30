@@ -29,7 +29,7 @@ public class Task2 {
 
         System.out.println("Elements in descending order: " + Arrays.toString(ten));
         
-        ten[9] = 1000;
+        ten[0] = 1000;
         
         System.out.println("Array is currently: " + Arrays.toString(ten));
     }
@@ -38,7 +38,7 @@ public class Task2 {
 --- exec:3.1.0:exec (default-cli) @ sortingalgorithm ---
 Sum is: 540
 Elements in descending order: [100, 90, 80, 70, 60, 50, 40, 20, 20, 10]
-Array is currently: [100, 90, 80, 70, 60, 50, 40, 20, 20, 1000]
+Array is currently: [1000, 90, 80, 70, 60, 50, 40, 20, 20, 10]
 ------------------------------------------------------------------------
 BUILD SUCCESS
 ------------------------------------------------------------------------
