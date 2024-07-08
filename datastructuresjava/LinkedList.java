@@ -1,114 +1,106 @@
-public class LinkedList {
-    private Node head;
-    private int size;
+// Now, we define the LinkedList class
+// to implement operations on the linked list
+class LinkedList<T> {
 
-    public static class Node {
-        int data;
-        Node next;
-    
-        public Node(int data) {
-            this.data = data;
-        }
-    }
-    
-    
-    //Let's add an element to the beginning
-    // of the list
-    public void addFirst(int data){
-        Node newNode = new Node(data);
-        newNode.next = head;
-        head = newNode;
-        size++;
-    }
-
-    // Let's add an element at a 
-    // specific index
-    public void addAtIndex(int index, int data){
-        if (index < 0 || index > size){
-            throw new IllegalArgumentException("Index out of bounds");
-        }
-
-        if (index == 0){
-            addFirst(data);
-            return;
-        }
-
-        Node current = head;
-        int counter = 0;
-
-        while (current != null && counter < index - 1){
-            current = current.next;
-            counter++;
-        }
-
-        if (current == null){
-            throw new IllegalArgumentException("Index out of bounds");
-        }
-
-        Node newNode = new Node(data);
-        newNode.next = current.next;
-        current.next = newNode;
-        size++;
-    }
+  private Node<T> head; // Reference to the head node of the list
 
 
-    // Get the element at a specific index
-    public int get(int index){
-        if(index < 0 || index >= size){
-            throw new IllegalArgumentException("Index out of bounds");
-        }
-
-        Node current = head;
-        int counter = 0;
-
-    while (current != null && counter < index) {
-      current = current.next;
-      counter++;
-    }
-
-    if (current == null) {
-      throw new IllegalArgumentException("Index out of bounds");
-    }
-
-    return current.data;
+  // Constructor to initialize an empty linked list
+  public LinkedList() {
+    this.head = null;
   }
 
-  // Remove the element at a specific index
-  public void remove(int index) {
-    if (index < 0 || index >= size) {
-      throw new IllegalArgumentException("Index out of bounds");
-    }
 
-    if (index == 0) {
-      head = head.next;
-      size--;
+  // Method to add element at the beginning of the list
+  public void addFirst(T data){
+    Node<T> newNode = new Node<>(data);
+
+    // Set the next of the new node to the current head
+    newNode.next = head;
+
+    // Set the new node as the new head of the list
+    head = newNode;
+  }
+
+
+  // Method to add an element at the end of the list
+  public void addLast(T data){
+
+    // Create a new node with the given data
+    Node<T> newNode = new Node<>(data);
+
+    if(head == null){
+      head = newNode; // if list is empty, set the new node as the head
       return;
     }
-
-    Node current = head;
-    int counter = 0;
-
-    while (current != null && counter < index - 1) {
-      current = current.next;
-      counter++;
+    Node<T> current = head;
+    while(current.next != null){
+      current = current.next; // Traverse to the end of the list
     }
+    current.next = newNode; // Set the next of the last node to the new node
+  }
 
-    if (current == null || current.next == null) {
-      throw new IllegalArgumentException("Index out of bounds");
+  // Method to add an element at a specific position in the list
+  public void add(int index, T data){
+    if (index < 0){
+      throw new IndexOutOfBoundsException("Index cannot be negative: " + index);
     }
-
-    current.next = current.next.next;
-    size--;
+    Node<T> newNode = new Node<>(data);
+    if (index == 0){
+      newNode.next = head; // Insert at the beginning if index is 0
+      head = newNode; // Set the new node as the new head
+      return;
+    }
+    Node<T> current = head;
+    int currentIndex = 0;
+    while (current != null && currentIndex < index - 1){
+      current = current.next; // Traverse to the node before the insertion point
+      currentIndex++;
+    }
+    if (current == null){
+      throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+    newNode.next = current.next; // Insert the new node between current and current.next
+    current.next = newNode;
   }
 
-  // Check the size of the list
-  public int size() {
-    return size;
+  // Method to remove the first occurrence of a specific
+  // element in the list
+  public boolean remove(T data){
+    if (head == null){
+      return false; // Return false if the list is empty
+    }
+    if (head.data.equals(data)) {
+      head = head.next; // Remove the head if it matches the data
+      return true;
+    }
+    Node<T> current = head;
+    while(current.next != null && !current.next.data.equals(data)) {
+      current = current.next; // Traverse to find the node before the node to be removed
+    }
+    if (current.next == null){
+      return false; // Return false if the element was not found in the list
+    }
+    current.next = current.next.next; // Remove the node by skipping it in the list
+    return true;
   }
 
-  // Check if the list is empty
-  public boolean isEmpty() {
-    return size == 0;
+  // Method to get the element at a specific index in the list
+  public T get(int index){
+    if (index < 0) {
+      throw new IndexOutOfBoundsException("Index cannot be negative: " + index);
+    }
+    Node<T> current = head;
+    int currentIndex = 0;
+    while (current != null && currentIndex < index){
+      current = current.next; // Traverse to find the node at the specified index
+      currentIndex++;
+    }
+    if (current == null){
+      throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+    return current.data; // Return the data of the node at the specified index
   }
+
+  
 }
-    
