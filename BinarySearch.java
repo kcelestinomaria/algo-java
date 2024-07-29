@@ -1,36 +1,33 @@
 public class BinarySearch {
-    public static int binarySearch(int[] arr, int target){
-        int left = 0;
-        int right = arr.length - 1;
 
-        while(left <= right){
-            int mid = left + (right - left) / 2;
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
 
-            // Check if target is present at mid
+        while(low <= high) {
+            int mid = (low + high) / 2;
+
             if (arr[mid] == target) {
-                return mid;
-            }
-
-            // if target is greater, ignore left half
-            if (arr[mid] < target) {
-                left = mid + 1;
+                return mid; // Target found, return the index
+            } else if (arr[mid] < target) {
+                low = mid + 1; // Search in the right half
             } else {
-                right = mid - 1;
+                high = mid - 1; // Search in the left half
             }
-
-            return -1;
         }
+        return -1; // Target not found, return -1
+    }
 
-        public static void main(String[] args) {
-            int[] arr = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
-            int target = 12;
-            int index = binarySearch(arr, target);
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 7, 9, 11, 13};
+        int target = 7;
 
-            if (index != -1){
-                System.out.println("Element " + target + " found at index " + index);
-            } else {
-                System.out.println("Element " + target + " not found in the array. ");
-            }
+        int result = binarySearch(arr, target);
+
+        if (result != -1) {
+            System.out.println("Target found at index: " + result);
+        } else {
+            System.out.println("Target not found.");
         }
     }
 }
