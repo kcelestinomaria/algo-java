@@ -1,9 +1,7 @@
-package Stacks;
-
 import java.util.Stack;
 
 public class BalancedParentheses {
-    public static boolean isBalanced(String expression){
+    public static boolean isBalanced(String expression) {
         Stack<Character> stack = new Stack<>();
 
         for (char ch : expression.toCharArray()) {
@@ -15,15 +13,15 @@ public class BalancedParentheses {
                 }
             }
         }
-
-        return stack.isEmpty();
     }
+    return stack.isEmpty();
+}
 
-    public static void main(String[] args) {
-        String expression1 = "(())";
-        String expression2 = "(()";
+public static void main(String[] args) {
+    String expression1 = "(())";
+    String expression2 = "(()";
 
-        System.out.println("Is balanced: " + isBalanced(expression1));
-        System.out.println("Is balanced: " + isBalanced(expression2));
-    }
+    System.out.println("Is balanced: " + isBalanced(expression1)); // Output: true
+    System.out.println("Is balanced: " + isBalanced(expression2)); // Output: false
+
 }
