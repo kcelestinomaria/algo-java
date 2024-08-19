@@ -1,9 +1,5 @@
-package Queues;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class SimpleQueue {
+
     public static void main(String[] args) {
         Queue<Integer> queue = new LinkedList<>();
 
@@ -19,11 +15,6 @@ public class SimpleQueue {
         System.out.println("Dequeued: " + queue.remove()); // deletes 1
 
         // Peek operation
-        System.out.println("Front element: " + queue.peek());
-
-        // Check if queue is empty
-        System.out.println("Is queue empty? " + queue.isEmpty());
-
-        System.out.println("Queue size: " + queue.size());
+        System.out.println("Front element: " + queue.peek())
     }
 }
