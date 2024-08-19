@@ -5,29 +5,30 @@ public class BinarySearch {
         int high = arr.length - 1;
 
         while(low <= high) {
-            int mid = (low + high) / 2;
+            int mid = low + (high - low) / 2;
 
             if (arr[mid] == target) {
-                return mid; // Target found, return the index
-            } else if (arr[mid] < target) {
-                low = mid + 1; // Search in the right half
+                return mid; // Target found at index mid
+            }
+            if (arr[mid] < target) {
+                low = mid + 1; // Search in the upper half
             } else {
-                high = mid - 1; // Search in the left half
+                high = mid - 1; // Search in the lower half
             }
         }
-        return -1; // Target not found, return -1
+
+        return -1; // Target not found
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, 3, 5, 7, 9, 11, 13};
-        int target = 7;
+        int[] sortedArray = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+        int target = 15;
 
-        int result = binarySearch(arr, target);
-
+        int result = binarySearch(sortedArray, target);
         if (result != -1) {
-            System.out.println("Target found at index: " + result);
+            System.out.println("Element found at index: " + result);
         } else {
-            System.out.println("Target not found.");
+            System.out.println("Element not found");
         }
     }
 }
